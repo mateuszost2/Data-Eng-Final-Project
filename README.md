@@ -20,3 +20,9 @@
 - Removed duplicate rows
 - Added `source_file` column
 - Exported cleaned dataset to `diabetes-clean.csv`
+### 4. Data ingestion
+- Created `MongoDatabase` class for connection management
+- Created `MongoExecutor` class for CRUD operations
+- Connected to MongoDB using credentials from `.env` using `python-dotenv`
+- Mapped each CSV row to a MongoDB document with a generated `external_id`
+- Ingested cleaned dataset into `diabetes_db.patients` collection
