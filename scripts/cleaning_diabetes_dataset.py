@@ -1,16 +1,13 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from pathlib import Path
-import seaborn as sns
 
 ## change pandas option to always display all collumns
 pd.set_option('display.max_columns', None)
 
 ## define clean and dirty paths
-DIABETES_DIR = Path("../raw/diabetes/")
-DIRTY_PATH = Path(DIABETES_DIR, "diabetes-dirty.csv")
-CLEAN_PATH = Path(DIABETES_DIR, "diabetes-clean.csv")
+DIRTY_PATH = Path("raw/diabetes/diabetes-dirty.csv")
+CLEAN_PATH = Path("raw/diabetes/diabetes-clean.csv")
 
 ## create dataframe for cleaning
 df = pd.read_csv(DIRTY_PATH, sep=';')
