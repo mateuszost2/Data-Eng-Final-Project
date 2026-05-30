@@ -1,8 +1,8 @@
-from statistics import median
-
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import seaborn as sns
 
 ## change pandas option to always display all collumns
 pd.set_option('display.max_columns', None)
@@ -96,8 +96,16 @@ for col in categorical_cols:
     else:
         df[col] = df[col].fillna(df[col].mode()[0])
 
+
+## remove outlayers
+df = df[df['glucose'] <= 500]
+df = df[df['insulin'] <= 1000]
+df = df[df['body_mass_index'] <= 70]
+
 ## remove duplicated columns
 df = df.drop_duplicates()
+
+
 
 ## add source path column to data frame
 df['source_file'] = 'diabetes-dirty.csv'
@@ -109,5 +117,4 @@ df['skin_thickness'] = df['skin_thickness'].astype('Int64')
 df['insulin'] = df['insulin'].astype('Int64')
 df['age'] = df['age'].astype('Int64')
 
-df.to_csv(CLEAN_PATH,index=False)
-
+df.to_csv(CLEAN_PATH, index=False)
