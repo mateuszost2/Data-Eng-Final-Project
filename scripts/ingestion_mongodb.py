@@ -99,5 +99,5 @@ def ingest_data(executor, csv_path, limit=None):
 my_mongo = MongoDatabase(MONGO_CONFIG)
 my_mongo.connect()
 executor = MongoExecutor(my_mongo, "patients")
-ingest_data(executor, "../raw/diabetes/diabetes-clean.csv")
+ingest_data(executor, "raw/diabetes/diabetes-clean.csv")
 my_mongo.close()
