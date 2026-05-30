@@ -5,9 +5,9 @@ from pathlib import Path
 ## change pandas option to always display all collumns
 pd.set_option('display.max_columns', None)
 
-## define clean and dirty paths
-DIRTY_PATH = Path("raw/diabetes/diabetes-dirty.csv")
-CLEAN_PATH = Path("raw/diabetes/diabetes-clean.csv")
+BASE_DIR = Path(__file__).parent.parent
+DIRTY_PATH = BASE_DIR / "raw/diabetes/diabetes-dirty.csv"
+CLEAN_PATH = BASE_DIR / "raw/diabetes/diabetes-clean.csv"
 
 ## create dataframe for cleaning
 df = pd.read_csv(DIRTY_PATH, sep=';')

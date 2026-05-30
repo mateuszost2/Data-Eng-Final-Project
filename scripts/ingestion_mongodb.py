@@ -4,6 +4,8 @@ import pandas as pd
 from pymongo import MongoClient
 from pathlib import Path
 
+BASE_DIR = Path(__file__).parent.parent
+CLEAN_PATH = BASE_DIR / "raw/diabetes/diabetes-clean.csv"
 
 class MongoDatabase:
     def __init__(self, db_config):
@@ -99,5 +101,5 @@ def ingest_data(executor, csv_path, limit=None):
 my_mongo = MongoDatabase(MONGO_CONFIG)
 my_mongo.connect()
 executor = MongoExecutor(my_mongo, "patients")
-ingest_data(executor, "raw/diabetes/diabetes-clean.csv")
+ingest_data(executor, CLEAN_PATH)
 my_mongo.close()
