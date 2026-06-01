@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 
 ## change pandas option to always display all collumns
-pd.set_option('display.max_columns', None)
+# pd.set_option('display.max_columns', None)
 
 BASE_DIR = Path(__file__).parent.parent
 DIRTY_PATH = BASE_DIR / "raw/diabetes/diabetes-dirty.csv"
@@ -54,7 +54,6 @@ df['body_mass_index'] = df['body_mass_index'].where(df['body_mass_index'] >= 0, 
 # age
 df['age'] = df['age'].str.replace('years', '').str.strip().astype('float64')
 df['age'] = df['age'].where(df['age'] >= 0, np.nan)
-df['age'] = df['age'].where(df['age'] < 150, np.nan)
 
 ## normalize casing and whitespace in categorical columns
 
