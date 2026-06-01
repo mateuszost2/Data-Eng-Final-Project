@@ -80,7 +80,7 @@ def map_external_record(record, dataset_name, row_number):
         "body_mass_index": float(record["body_mass_index"]),
         "diabetes_pedigree_function": float(record["diabetes_pedigree_function"]),
         "age": int(record["age"]),
-        "outcome": int(record["outcome"]),
+        "outcome": record["outcome"],
         "bmi_category": record["bmi_category"],
         "clinic_region": record["clinic_region"],
         "care_path": record["care_path"],
