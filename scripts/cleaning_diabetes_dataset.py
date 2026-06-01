@@ -56,53 +56,25 @@ df['age'] = df['age'].str.replace('years', '').str.strip().astype('float64')
 df['age'] = df['age'].where(df['age'] >= 0, np.nan)
 df['age'] = df['age'].where(df['age'] < 150, np.nan)
 
-## standardize unique values in categorical columns
+## normalize casing and whitespace in categorical columns
 
 # outcome
-df['outcome'] = df['outcome'].str.replace('?', 'nan').str.strip()
-df['outcome'] = df['outcome'].replace({'positive': '1', 'negative': '0', 'nan': np.nan}).astype('Int64')
+df['outcome'] = df['outcome'].str.strip()
 
 # bmi_category
 df['bmi_category'] = df['bmi_category'].str.lower().str.strip()
-df['bmi_category'] = df['bmi_category'].replace(
-    {'normal-weight': 'normal', 'under wt': 'underweight', 'nan': np.nan, 'unknown': np.nan, })
 
 # clinic_region
 df['clinic_region'] = df['clinic_region'].str.lower().str.strip()
-df['clinic_region'] = df['clinic_region'].replace(
-    {'south-side': 'south', 'n': 'north', '?': np.nan, 'unknown': np.nan, })
 
 # care_path
 df['care_path'] = df['care_path'].str.lower().str.strip().str.replace(' ', '-')
-df['care_path'] = df['care_path'].replace({'urgent-monitoring': 'high-risk', 'routine': 'routine-follow-up'})
 
 # patient_segment
 df['patient_segment'] = df['patient_segment'].str.lower().str.strip().str.replace(' ', '-')
-df['patient_segment'] = df['patient_segment'].replace({'mid-age': 'adult', '?': np.nan}, )
-
-## fill missing values
-
-# use median for numerical columns
-for col in numerical_cols:
-    df[col] = df[col].fillna(df[col].median())
-
-# use mode for categorical columns
-for col in categorical_cols:
-    if df[col].mode().empty:
-        df[col] = df[col].fillna("unknown")
-    else:
-        df[col] = df[col].fillna(df[col].mode()[0])
-
-
-## remove outlayers
-df = df[df['glucose'] <= 500]
-df = df[df['insulin'] <= 1000]
-df = df[df['body_mass_index'] <= 70]
 
 ## remove duplicated columns
 df = df.drop_duplicates()
-
-
 
 ## add source path column to data frame
 df['source_file'] = 'diabetes-dirty.csv'
