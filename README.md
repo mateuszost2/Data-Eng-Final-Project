@@ -14,7 +14,7 @@
 - Standardized column names (lowercase, underscores)
 - Removed units from numerical columns (`mg/dL`, `uU/mL`)
 - Normalized casing and whitespace in categorical columns
-- Replaced invalid string values with `NaN` (e.g. `?`, `nan`)
+- Replaced invalid string values with `NaN` (e.g. `?`, `nan uU/mL`)
 - Replaced biologically impossible values with `NaN` (negative pregnancies)
 - Removed duplicate rows
 - Added `source_file` column
@@ -25,3 +25,7 @@
 - Connected to MongoDB using credentials from `.env` using `python-dotenv`
 - Mapped each CSV row to a MongoDB document with a generated `external_id`
 - Ingested cleaned dataset into `diabetes_db.patients` collection
+### 5. Exploratory Data Analysis
+- Connected to MongoDB and loaded data into a pandas DataFrame
+- Checked shape, types, nulls and duplicates
+- Applied data wrangling (data scientist perspective): imputed missing values, standardized labels, removed outliers
