@@ -28,4 +28,10 @@
 ### 5. Exploratory Data Analysis
 - Connected to MongoDB and loaded data into a pandas DataFrame
 - Checked shape, types, nulls and duplicates
-- Applied data wrangling (data scientist perspective): imputed missing values, standardized labels, removed outliers
+- Applied data wrangling: standardized categorical labels, imputed missing values, removed outliers and duplicates
+- Added visualizations:
+  - Diabetes outcome distribution
+  - Glucose levels by outcome boxplot
+  - Correlation matrix heatmap
+  - BMI category by outcome
+  - Pairplot of all numerical features colored by outcome
