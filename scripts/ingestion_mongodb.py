@@ -91,11 +91,19 @@ def map_external_record(record, dataset_name, row_number):
 
 def ingest_data(executor, csv_path, limit=None):
     df = pd.read_csv(csv_path)
+    
     if limit:
         df = df.head(limit)
-    documents = [map_external_record(row, "DIABETES", i) for i, row in enumerate(df.to_dict(orient="records"), start=1)]
-    result = executor.insert_many(documents)
-    return len(result.inserted_ids)
+    
+    documents = []
+    row_number = 1
+    
+    for row in df.to_dict(orient="records"):
+        document = map_external_record(row, "DIABETES", row_number)
+        documents.append(document)
+        row_number += 1
+    
+    executor.insert_many(documents)
 
 
 my_mongo = MongoDatabase(MONGO_CONFIG)
