@@ -59,18 +59,38 @@ df['age'] = df['age'].where(df['age'] >= 0, np.nan)
 
 # outcome
 df['outcome'] = df['outcome'].str.strip()
+df['outcome'] = df['outcome'].astype(str).replace({'positive': '1', 'negative': '0', '?': 'nan', 'nan': 'nan'})
+df['outcome'] = pd.to_numeric(df['outcome'], errors='coerce').astype('Int64')
 
 # bmi_category
 df['bmi_category'] = df['bmi_category'].str.lower().str.strip()
+df['bmi_category'] = df['bmi_category'].replace({
+    'normal-weight': 'normal', 
+    'under wt': 'underweight', 
+    'nan': np.nan, 
+    'unknown': np.nan
+})
 
 # clinic_region
 df['clinic_region'] = df['clinic_region'].str.lower().str.strip()
+df['clinic_region'] = df['clinic_region'].replace({
+    'south-side': 'south', 
+    'n': 'north', 
+    '?': np.nan, 
+    'unknown': np.nan
+})
 
 # care_path
 df['care_path'] = df['care_path'].str.lower().str.strip().str.replace(' ', '-')
+df['care_path'] = df['care_path'].replace({
+    'urgent-monitoring': 'high-risk', 
+    'routine': 'routine-follow-up'
+})
 
 # patient_segment
 df['patient_segment'] = df['patient_segment'].str.lower().str.strip().str.replace(' ', '-')
+df['patient_segment'] = df['patient_segment'].replace({'mid-age': 'adult', '?': np.nan})
+
 
 ## remove duplicated columns
 df = df.drop_duplicates()
